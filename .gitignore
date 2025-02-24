@@ -1,1 +1,6 @@
 /venv
+/shared_objects
+**/db.sqlite3
+migrations/
+__pycache__/
+.idea/

@@ -29,4 +29,5 @@ COPY . /app/
 EXPOSE $USR_PORT
  
 # Run Django’s development server
+CMD python manage.py migrate
 CMD python manage.py runserver 0.0.0.0:${USR_PORT}
