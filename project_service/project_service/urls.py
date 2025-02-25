@@ -16,7 +16,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from rest_framework.urlpatterns import include
+from rest_framework.routers import DefaultRouter
+from project_service.views import *
+
+router = DefaultRouter()
+router.register(r'project', ProjectViewSet)
+router.register(r'timeline', TimelineViewSet)
+router.register(r'event', EventViewSet)
+router.register(r'event_type', EventTypeViewSet)
+router.register(r'project_member', ProjectMemberViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path("", include(router.urls)),
 ]
