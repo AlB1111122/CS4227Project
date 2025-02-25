@@ -1,0 +1,41 @@
+Table project {
+  id integer [primary key]
+  created_at timestamp
+  timeline_id int
+  description varchar
+}
+Ref: project.timeline_id - timeline.id
+
+Table timeline {
+  id integer [primary key]
+  created_at timestamp
+  timeline_start timestamp
+  timeline_end timestamp
+}
+
+Table event {
+  id integer [primary key]
+  timeline_id int
+  created_at timestamp
+  start_date timestamp
+  end_date timestamp
+  name varchar
+  description varchar
+  type_id int
+  financial_impact int
+}
+Ref: event.timeline_id > timeline.id
+Ref: event.type_id > event_type.id
+
+Table event_type {
+  id integer [primary key]
+  name varchar
+}
+
+Table project_member {
+  id integer [primary key]
+  project_id int
+  user_id int
+  role varchar
+}
+Ref: project_member.project_id > project.id
