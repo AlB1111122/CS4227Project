@@ -1,0 +1,46 @@
+//https://dbdiagram.io/d
+Table Timeline {
+    id            int       [pk, increment]
+    created_at    date      [not null]
+    timeline_start date     [not null]
+    timeline_end  date      [not null]
+}
+
+Table Project {
+    id            int       [pk, increment]
+    created_at    date      [not null]
+    timeline_id   int       [ref: > Timeline.id, null]
+    name          varchar(255) [not null]
+    description   varchar(600)
+}
+
+Table EventType {
+    id            int       [pk, increment]
+    name          varchar(255) [unique, not null]
+}
+
+Table Event {
+    id            int       [pk, increment]
+    timeline_id   int       [ref: > Timeline.id, not null]
+    created_at    date      [not null]
+    start_date    date      [not null]
+    end_date      date      [not null]
+    name          varchar(255) [not null]
+    description   varchar(600)
+    type_id       int       [ref: > EventType.id, not null]
+    financial_impact int     [not null]
+    document_id   int       [null]
+}
+
+Table ProjectMember {
+    id            int       [pk, increment]
+    project_id    int       [ref: > Project.id, not null]
+    user_id       int       [not null]
+    role          varchar(255) [default: 'VIEWER', not null]
+}
+
+Enum Role {
+    OWNER
+    EDITOR
+    VIEWER
+}
